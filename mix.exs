@@ -5,9 +5,19 @@ defmodule Mime.Mixfile do
     [app: :mime,
      version: "0.0.1",
      elixir: "~> 1.1",
+     description: "A mime type module for elixir.",
+     package: package,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
+  end
+
+  def package do
+    [
+      files: ["lib", "priv", "config", "mix.exs", "README*"],
+      maintainers: ["alirz23"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/elixirdrops/mime"}]
   end
 
   # Configuration for the OTP application
