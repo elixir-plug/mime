@@ -46,5 +46,4 @@ defmodule Mime do
   def version do
     Mix.Project.config[:version]
   end
-
-  end
+end
