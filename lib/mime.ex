@@ -35,7 +35,9 @@ defmodule MIME do
   app = Application.get_env(:mime, :types, %{})
 
   mapping = Enum.reduce app, mapping, fn {k, v}, acc ->
-    List.keystore(acc, k, 0, {k, v})
+    type = to_string(k)
+    exts = Enum.map(List.wrap(v), &to_string/1)
+    List.keystore(acc, type, 0, {type, exts})
   end
 
   @doc """
