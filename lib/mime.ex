@@ -32,7 +32,14 @@ defmodule MIME do
     end
   end)
 
+  old = Application.get_env(:plug, :mimes, %{})
   app = Application.get_env(:mime, :types, %{})
+
+  unless Map.keys(old) == [] do
+    IO.write :stderr, "warning: `config :plug, :mimes` is deprecated, please use `config :mime, :types` instead\n"
+  end
+
+  app = Map.merge(old, app)
 
   mapping = Enum.reduce app, mapping, fn {k, v}, acc ->
     type = to_string(k)
