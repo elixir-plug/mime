@@ -32,11 +32,39 @@ defmodule MIME do
     end
   end)
 
+  old = Application.get_env(:plug, :mimes, %{})
   app = Application.get_env(:mime, :types, %{})
 
-  mapping = Enum.reduce app, mapping, fn {k, v}, acc ->
-    List.keystore(acc, k, 0, {k, v})
+  unless Map.keys(old) == [] do
+    IO.write :stderr, "warning: `config :plug, :mimes` is deprecated, please use `config :mime, :types` instead\n"
   end
+
+  app = Map.merge(old, app)
+
+  @mapping Enum.reduce app, mapping, fn {k, v}, acc ->
+    type = to_string(k)
+    exts = Enum.map(List.wrap(v), &to_string/1)
+    List.keystore(acc, type, 0, {type, exts})
+  end
+      
+  
+  @doc """
+  Returns a Keyword list of MIME types and their associated extensions.
+  """
+  @spec mapping :: Keyword.t
+  def mapping, do: @mapping |> List.keysort(0)
+  
+  @doc """
+  Returns a list of all known MIME types.
+  """
+  @spec types :: list(String.t)
+  def types, do: @mapping |> Enum.map(&(elem(&1, 0))) |> Enum.sort
+  
+  @doc """
+  Returns a list of all known extensions associated with MIME types.
+  """
+  @spec extensions :: list(String.t)
+  def extensions, do: @mapping |> Enum.map(&(elem(&1, 1))) |> List.flatten |> Enum.uniq |> Enum.sort
 
   @doc """
   Returns whether a MIME type is registered.
@@ -121,9 +149,10 @@ defmodule MIME do
   # entry/1
   @spec entry(String.t) :: list(String.t)
 
-  for {type, exts} <- mapping do
+  for {type, exts} <- @mapping do
     defp entry(unquote(type)), do: unquote(exts)
   end
 
   defp entry(_type), do: nil
+      
 end
