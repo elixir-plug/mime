@@ -1,11 +1,11 @@
-defmodule Mime.Mixfile do
+defmodule MIME.Mixfile do
   use Mix.Project
 
   def project do
     [app: :mime,
-     version: "0.0.1",
-     elixir: "~> 1.1",
-     description: "A mime type module for elixir.",
+     version: "1.0.0-dev",
+     elixir: "~> 1.0",
+     description: "A MIME type module for Elixir",
      package: package,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -13,29 +13,15 @@ defmodule Mime.Mixfile do
   end
 
   def package do
-    [
-      files: ["lib", "priv", "config", "mix.exs", "README*"],
-      maintainers: ["alirz23"],
-      licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/elixirdrops/mime"}]
+    [maintainers: ["alirz23", "José Valim"],
+     licenses: ["Apache 2"],
+     links: %{"GitHub" => "https://github.com/elixir-lang/mime"}]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: []]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
   defp deps do
     []
   end

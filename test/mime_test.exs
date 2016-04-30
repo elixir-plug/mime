@@ -1,28 +1,28 @@
-defmodule MimeTest do
-  use ExUnit.Case
-  use Mime
+defmodule MIMETest do
+  use ExUnit.Case, async: true
 
-  doctest Mime
+  import Plug.MIME
+  doctest Plug.MIME
 
-  test "valid mime type" do
-    assert Mime.valid?("application/json")
+  test "valid?/1" do
+    assert valid?("application/json")
+    refute valid?("application/prs.vacation-photos")
   end
 
-  test "one or more extensions" do
-    assert "json" in Mime.extensions("application/json")
+  test "extensions/1" do
+    assert "json" in extensions("application/json")
+    assert extensions("application/vnd.api+json") == []
   end
 
-  test "ext to type" do
-    assert "application/json" == Mime.type("json")
+  test "type/1" do
+    assert type("json") == "application/json"
+    assert type("foo") == "application/octet-stream"
   end
 
-  test "default ext to type" do
-    assert "application/octet-stream" == Mime.type("default")
+  test "path/1" do
+    assert path("index.html") == "text/html"
+    assert path("index.HTML") == "text/html"
+    assert path("inexistent.filetype") == "application/octet-stream"
+    assert path("without-extension") == "application/octet-stream"
   end
-
-  # added just as reminder tests will fail if we don't bump the number
-  test "correct version number" do
-    assert "0.0.1" = Mime.version
-  end
-
 end

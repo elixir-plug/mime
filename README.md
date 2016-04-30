@@ -1,15 +1,15 @@
-# Mime
+# MIME
 
-**TODO: Add description**
+A library for that maps mime types to extensions and vice-versa.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+The package can be installed as:
 
   1. Add mime to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:mime, "~> 0.0.1"}]
+          [{:mime, "~> 1.0"}]
         end
 
   2. Ensure mime is started before your application:
@@ -17,3 +17,9 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
         def application do
           [applications: [:mime]]
         end
+
+## License
+
+MIME source code is released under Apache 2 License.
+
+Check LICENSE file for more information.
