@@ -1,8 +1,8 @@
 defmodule MIMETest do
   use ExUnit.Case, async: true
 
-  import Plug.MIME
-  doctest Plug.MIME
+  import MIME
+  doctest MIME
 
   test "valid?/1" do
     assert valid?("application/json")
