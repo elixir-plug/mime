@@ -19,10 +19,10 @@ defmodule MIMETest do
     assert type("foo") == "application/octet-stream"
   end
 
-  test "path/1" do
-    assert path("index.html") == "text/html"
-    assert path("index.HTML") == "text/html"
-    assert path("inexistent.filetype") == "application/octet-stream"
-    assert path("without-extension") == "application/octet-stream"
+  test "from_path/1" do
+    assert from_path("index.html") == "text/html"
+    assert from_path("index.HTML") == "text/html"
+    assert from_path("inexistent.filetype") == "application/octet-stream"
+    assert from_path("without-extension") == "application/octet-stream"
   end
 end

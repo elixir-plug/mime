@@ -104,12 +104,12 @@ defmodule MIME do
 
   ## Examples
 
-      iex> MIME.path("index.html")
+      iex> MIME.from_path("index.html")
       "text/html"
 
   """
-  @spec path(Path.t) :: String.t
-  def path(path) do
+  @spec from_path(Path.t) :: String.t
+  def from_path(path) do
     case Path.extname(path) do
       "." <> ext -> type(downcase(ext, ""))
       _ -> @default_type
