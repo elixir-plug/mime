@@ -6,17 +6,32 @@ A library for that maps mime types to extensions and vice-versa.
 
 The package can be installed as:
 
-  1. Add mime to your list of dependencies in `mix.exs`:
+1. Add mime to your list of dependencies in `mix.exs`:
 
-        def deps do
-          [{:mime, "~> 1.0"}]
-        end
+  ```elixir
+  def deps do
+    [{:mime, "~> 1.0"}]
+  end
+  ```
 
-  2. Ensure mime is started before your application:
+2. Ensure mime is started before your application:
 
-        def application do
-          [applications: [:mime]]
-        end
+  ```elixir
+  def application do
+    [applications: [:mime]]
+  end
+  ```
+  
+## Usage
+
+MIME types can be extended in your application configuration
+as follows:
+
+```elixir
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json-api"]
+}
+```
 
 ## License
 
