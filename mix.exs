@@ -27,6 +27,7 @@ defmodule MIME.Mixfile do
   end
 
   defp deps do
-    []
+    [{:ex_doc, "~> 0.11", only: :docs},
+     {:earmark, ">= 0.0.0", only: :docs}]
   end
 end
