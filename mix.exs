@@ -12,7 +12,7 @@ defmodule MIME.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps,
-     docs: [source_ref: "v#{@version}",
+     docs: [source_ref: "v#{@version}", main: "MIME",
             source_url: "https://github.com/elixir-lang/mime"]]
   end
 
