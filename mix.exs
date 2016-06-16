@@ -8,10 +8,10 @@ defmodule MIME.Mixfile do
      version: @version,
      elixir: "~> 1.0",
      description: "A MIME type module for Elixir",
-     package: package,
+     package: package(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps,
+     deps: deps(),
      docs: [source_ref: "v#{@version}", main: "MIME",
             source_url: "https://github.com/elixir-lang/mime"]]
   end
