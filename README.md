@@ -1,6 +1,6 @@
 # MIME
 
-A library for that maps mime types to extensions and vice-versa.
+A library that maps mime types to extensions and vice-versa.
 
 ## Installation
 
