@@ -389,7 +389,7 @@ application/vnd.antix.game-component
 application/vnd.apache.thrift.binary
 application/vnd.apache.thrift.compact
 application/vnd.apache.thrift.json
-application/vnd.api+json
+application/vnd.api+json    json-api
 application/vnd.apple.installer+xml		dist distz pkg mpkg
 # m3u: audio/x-mpegurl for now
 application/vnd.apple.mpegurl			m3u8
