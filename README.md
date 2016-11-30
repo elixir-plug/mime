@@ -24,14 +24,15 @@ The package can be installed as:
   
 ## Usage
 
-MIME types can be extended in your application configuration
-as follows:
+MIME types can be extended in your application `config/config.exs` as follows:
 
 ```elixir
 config :mime, :types, %{
   "application/vnd.api+json" => ["json-api"]
 }
 ```
+
+And then run `mix deps.clean --build mime` to force mime to be recompiled across all environments.
 
 ## License
 
