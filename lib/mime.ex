@@ -22,7 +22,7 @@ defmodule MIME do
   @external_resource "lib/mime.types"
   stream = File.stream!("lib/mime.types")
 
-  mapping = Enum.flat_map(stream, fn (line) ->
+  mapping = Enum.flat_map(stream, fn(line) ->
     if String.starts_with?(line, ["#", "\n"]) do
       []
     else
@@ -33,11 +33,11 @@ defmodule MIME do
 
   app = Application.get_env(:mime, :types, %{})
 
-  mapping = Enum.reduce app, mapping, fn {k, v}, acc ->
+  mapping = Enum.reduce(app, mapping, fn({k, v}, acc) ->
     type = to_string(k)
     exts = Enum.map(List.wrap(v), &to_string/1)
     List.keystore(acc, type, 0, {type, exts})
-  end
+  end)
 
   @doc """
   Returns whether a MIME type is registered.
@@ -53,7 +53,7 @@ defmodule MIME do
   """
   @spec valid?(String.t) :: boolean
   def valid?(type) do
-    is_list entry(type)
+    is_list(entry(type))
   end
 
   @doc """
@@ -120,6 +120,7 @@ defmodule MIME do
   defp downcase(<<>>, acc), do: acc
 
   @spec entry(String.t) :: list(String.t)
+  defp entry(type)
 
   for {type, exts} <- mapping do
     defp entry(unquote(type)), do: unquote(exts)
