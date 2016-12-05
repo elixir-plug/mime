@@ -19,7 +19,6 @@ defmodule MIME do
   @compile :no_native
   @default_type "application/octet-stream"
 
-  # Read all the MIME type mappings into the `mapping` variable.
   @external_resource "lib/mime.types"
   stream = File.stream!("lib/mime.types")
 
@@ -120,7 +119,6 @@ defmodule MIME do
   defp downcase(<<h, t::binary>>, acc), do: downcase(t, <<acc::binary, h>>)
   defp downcase(<<>>, acc), do: acc
 
-  # entry/1
   @spec entry(String.t) :: list(String.t)
 
   for {type, exts} <- mapping do
