@@ -1,6 +1,6 @@
 defmodule MIME do
   @moduledoc """
-  Maps MIME types to file extensions and vice versa.
+  Maps MIME types to its file extensions and vice versa.
 
   MIME types can be extended in your application configuration
   as follows:
@@ -17,13 +17,11 @@ defmodule MIME do
   """
 
   @compile :no_native
-  @default_type "application/octet-stream"
-
-  # Read all the MIME type mappings into the `mapping` variable.
   @external_resource "lib/mime.types"
+
   stream = File.stream!("lib/mime.types")
 
-  mapping = Enum.flat_map(stream, fn (line) ->
+  mapping = Enum.flat_map(stream, fn(line) ->
     if String.starts_with?(line, ["#", "\n"]) do
       []
     else
@@ -34,11 +32,11 @@ defmodule MIME do
 
   app = Application.get_env(:mime, :types, %{})
 
-  mapping = Enum.reduce app, mapping, fn {k, v}, acc ->
+  mapping = Enum.reduce(app, mapping, fn({k, v}, acc) ->
     type = to_string(k)
     exts = Enum.map(List.wrap(v), &to_string/1)
     List.keystore(acc, type, 0, {type, exts})
-  end
+  end)
 
   @doc """
   Returns whether a MIME type is registered.
@@ -54,7 +52,7 @@ defmodule MIME do
   """
   @spec valid?(String.t) :: boolean
   def valid?(type) do
-    is_list entry(type)
+    is_list(entry(type))
   end
 
   @doc """
@@ -76,6 +74,8 @@ defmodule MIME do
   def extensions(type) do
     entry(type) || []
   end
+
+  @default_type "application/octet-stream"
 
   @doc """
   Returns the MIME type associated with a file extension. If no MIME type is
@@ -120,8 +120,8 @@ defmodule MIME do
   defp downcase(<<h, t::binary>>, acc), do: downcase(t, <<acc::binary, h>>)
   defp downcase(<<>>, acc), do: acc
 
-  # entry/1
   @spec entry(String.t) :: list(String.t)
+  defp entry(type)
 
   for {type, exts} <- mapping do
     defp entry(unquote(type)), do: unquote(exts)
