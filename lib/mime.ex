@@ -17,9 +17,8 @@ defmodule MIME do
   """
 
   @compile :no_native
-  @default_type "application/octet-stream"
-
   @external_resource "lib/mime.types"
+
   stream = File.stream!("lib/mime.types")
 
   mapping = Enum.flat_map(stream, fn(line) ->
@@ -75,6 +74,8 @@ defmodule MIME do
   def extensions(type) do
     entry(type) || []
   end
+
+  @default_type "application/octet-stream"
 
   @doc """
   Returns the MIME type associated with a file extension. If no MIME type is
