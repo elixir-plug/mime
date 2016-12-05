@@ -1,6 +1,6 @@
 defmodule MIME do
   @moduledoc """
-  Maps MIME types to file extensions and vice versa.
+  Maps MIME types to its file extensions and vice versa.
 
   MIME types can be extended in your application configuration
   as follows:
