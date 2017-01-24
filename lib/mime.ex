@@ -32,12 +32,6 @@ defmodule MIME do
 
   app = Application.get_env(:mime, :types, %{})
 
-  mapping = Enum.reduce(app, mapping, fn({k, v}, acc) ->
-    type = to_string(k)
-    exts = Enum.map(List.wrap(v), &to_string/1)
-    List.keystore(acc, type, 0, {type, exts})
-  end)
-
   @doc """
   Returns whether a MIME type is registered.
 
@@ -93,6 +87,11 @@ defmodule MIME do
   @spec type(String.t) :: String.t
   def type(file_extension)
 
+  # The ones from the app always come first.
+  for {type, exts} <- app, ext <- List.wrap(exts) do
+    def type(unquote(ext)), do: unquote(type)
+  end
+
   for {type, exts} <- mapping, ext <- exts do
     def type(unquote(ext)), do: unquote(type)
   end
@@ -122,6 +121,10 @@ defmodule MIME do
 
   @spec entry(String.t) :: list(String.t)
   defp entry(type)
+
+  for {type, exts} <- app do
+    defp entry(unquote(type)), do: unquote(List.wrap(exts))
+  end
 
   for {type, exts} <- mapping do
     defp entry(unquote(type)), do: unquote(exts)

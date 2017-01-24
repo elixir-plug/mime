@@ -25,4 +25,9 @@ defmodule MIMETest do
     assert from_path("inexistent.filetype") == "application/octet-stream"
     assert from_path("without-extension") == "application/octet-stream"
   end
+
+  test "config" do
+    assert extensions("video/mp2t") == ["ts"]
+    assert from_path("video.ts") == "video/mp2t"
+  end
 end
