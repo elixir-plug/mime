@@ -19,6 +19,11 @@ defmodule MIMETest do
     assert type("foo") == "application/octet-stream"
   end
 
+  test "type_known?/1" do
+    assert type_known?("json") == true
+    assert type_known?("foo") == false
+  end
+
   test "from_path/1" do
     assert from_path("index.html") == "text/html"
     assert from_path("index.HTML") == "text/html"

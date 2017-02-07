@@ -99,6 +99,31 @@ defmodule MIME do
   def type(_ext), do: @default_type
 
   @doc """
+  Returns whether an extension has a MIME type registered.
+
+  ## Examples
+
+      iex> MIME.type_known?("txt")
+      true
+
+      iex> MIME.type_known?("foobarbaz")
+      false
+
+  """
+  @spec type_known?(String.t) :: boolean
+  def type_known?(file_extension)
+
+  for {_type, exts} <- app, ext <- List.wrap(exts) do
+    def type_known?(unquote(ext)), do: true
+  end
+
+  for {_type, exts} <- mapping, ext <- exts do
+    def type_known?(unquote(ext)), do: true
+  end
+
+  def type_known?(_ext), do: false
+
+  @doc """
   Guesses the MIME type based on the path's extension. See `type/1`.
 
   ## Examples
