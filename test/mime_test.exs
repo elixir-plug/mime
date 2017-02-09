@@ -19,9 +19,9 @@ defmodule MIMETest do
     assert type("foo") == "application/octet-stream"
   end
 
-  test "type_known?/1" do
-    assert type_known?("json") == true
-    assert type_known?("foo") == false
+  test "has_type?/1" do
+    assert has_type?("json") == true
+    assert has_type?("foo") == false
   end
 
   test "from_path/1" do

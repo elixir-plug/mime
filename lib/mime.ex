@@ -46,7 +46,7 @@ defmodule MIME do
   """
   @spec valid?(String.t) :: boolean
   def valid?(type) do
-    is_list(entry(type))
+    is_list(mime_to_ext(type))
   end
 
   @doc """
@@ -66,14 +66,16 @@ defmodule MIME do
   """
   @spec extensions(String.t) :: [String.t]
   def extensions(type) do
-    entry(type) || []
+    mime_to_ext(type) || []
   end
 
   @default_type "application/octet-stream"
 
   @doc """
-  Returns the MIME type associated with a file extension. If no MIME type is
-  known for `file_extension`, `#{inspect @default_type}` is returned.
+  Returns the MIME type associated with a file extension.
+
+  If no MIME type is known for `file_extension`,
+  `#{inspect @default_type}` is returned.
 
   ## Examples
 
@@ -85,43 +87,26 @@ defmodule MIME do
 
   """
   @spec type(String.t) :: String.t
-  def type(file_extension)
-
-  # The ones from the app always come first.
-  for {type, exts} <- app, ext <- List.wrap(exts) do
-    def type(unquote(ext)), do: unquote(type)
+  def type(file_extension) do
+    ext_to_mime(file_extension) || @default_type
   end
-
-  for {type, exts} <- mapping, ext <- exts do
-    def type(unquote(ext)), do: unquote(type)
-  end
-
-  def type(_ext), do: @default_type
 
   @doc """
   Returns whether an extension has a MIME type registered.
 
   ## Examples
 
-      iex> MIME.type_known?("txt")
+      iex> MIME.has_type?("txt")
       true
 
-      iex> MIME.type_known?("foobarbaz")
+      iex> MIME.has_type?("foobarbaz")
       false
 
   """
-  @spec type_known?(String.t) :: boolean
-  def type_known?(file_extension)
-
-  for {_type, exts} <- app, ext <- List.wrap(exts) do
-    def type_known?(unquote(ext)), do: true
+  @spec has_type?(String.t) :: boolean
+  def has_type?(file_extension) do
+    is_binary(ext_to_mime(file_extension))
   end
-
-  for {_type, exts} <- mapping, ext <- exts do
-    def type_known?(unquote(ext)), do: true
-  end
-
-  def type_known?(_ext), do: false
 
   @doc """
   Guesses the MIME type based on the path's extension. See `type/1`.
@@ -144,16 +129,30 @@ defmodule MIME do
   defp downcase(<<h, t::binary>>, acc), do: downcase(t, <<acc::binary, h>>)
   defp downcase(<<>>, acc), do: acc
 
-  @spec entry(String.t) :: list(String.t)
-  defp entry(type)
+  @spec ext_to_mime(String.t) :: String.t | nil
+  defp ext_to_mime(type)
+
+  # The ones from the app always come first.
+  for {type, exts} <- app, ext <- List.wrap(exts) do
+    defp ext_to_mime(unquote(ext)), do: unquote(type)
+  end
+
+  for {type, exts} <- mapping, ext <- exts do
+    defp ext_to_mime(unquote(ext)), do: unquote(type)
+  end
+
+  defp ext_to_mime(_ext), do: nil
+
+  @spec mime_to_ext(String.t) :: list(String.t) | nil
+  defp mime_to_ext(type)
 
   for {type, exts} <- app do
-    defp entry(unquote(type)), do: unquote(List.wrap(exts))
+    defp mime_to_ext(unquote(type)), do: unquote(List.wrap(exts))
   end
 
   for {type, exts} <- mapping do
-    defp entry(unquote(type)), do: unquote(exts)
+    defp mime_to_ext(unquote(type)), do: unquote(exts)
   end
 
-  defp entry(_type), do: nil
+  defp mime_to_ext(_type), do: nil
 end
