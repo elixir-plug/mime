@@ -63,6 +63,7 @@ application/CEA					cea
 application/cea-2018+xml
 application/cellml+xml				cellml cml
 application/cfw
+application/clue_info+xml			clue
 application/cms					cmsc
 application/cnrp+xml
 application/coap-group+json
@@ -115,6 +116,7 @@ application/font-sfnt				ttf
 application/font-tdpfr				pfr
 application/font-woff				woff
 application/framework-attributes+xml
+application/geo+json				geojson
 application/gzip				gz tgz
 application/H224
 application/held+xml
@@ -149,6 +151,7 @@ application/jwt
 application/kpml-request+xml
 application/kpml-response+xml
 application/ld+json				jsonld
+application/lgr+xml				lgr
 application/link-format				wlnk
 application/load-control+xml
 application/lost+xml				lostxml
@@ -377,6 +380,7 @@ application/vnd.ah-barcode
 application/vnd.ahead.space			ahead
 application/vnd.airzip.filesecure.azf		azf
 application/vnd.airzip.filesecure.azs		azs
+application/vnd.amazon.mobi8-ebook		azw3
 application/vnd.americandynamics.acc		acc
 application/vnd.amiga.ami			ami
 application/vnd.amundsen.maze+xml
@@ -415,6 +419,7 @@ application/vnd.canon-lips
 application/vnd.cendio.thinlinc.clientconf	tlclient
 application/vnd.century-systems.tcp_stream
 application/vnd.chemdraw+xml			cdxml
+application/vnd.chess-pgn			pgn
 application/vnd.chipnuts.karaoke-mmd		mmd
 application/vnd.cinderella			cdy
 application/vnd.cirpack.isdn-ext
@@ -428,6 +433,7 @@ application/vnd.coffeescript			coffee
 application/vnd.collection+json
 application/vnd.collection.doc+json
 application/vnd.collection.next+json
+application/vnd.comicbook+zip			cbz
 # icc: application/vnd.iccprofile
 application/vnd.commerce-battelle	ica icf icd ic0 ic1 ic2 ic3 ic4 ic5 ic6 ic7 ic8
 application/vnd.commonspace			csp cst
@@ -514,6 +520,7 @@ application/vnd.epson.quickanime		qam
 application/vnd.epson.salt			slt
 application/vnd.epson.ssf			ssf
 application/vnd.ericsson.quickcall		qcall qca
+application/vnd.espass-espass+zip		espass
 application/vnd.eszigno3+xml			es3 et3
 application/vnd.etsi.aoc+xml
 application/vnd.etsi.asic-e+zip			asice sce
@@ -573,7 +580,7 @@ application/vnd.fujixerox.HBPL
 application/vnd.fut-misnet
 application/vnd.fuzzysheet			fzs
 application/vnd.genomatix.tuxedo		txd
-application/vnd.geo+json			geojson
+# application/vnd.geo+json obsoleted by application/geo+json
 application/vnd.geocube+xml			g3 g³
 application/vnd.geogebra.file			ggb
 application/vnd.geogebra.tool			ggt
@@ -790,6 +797,7 @@ application/vnd.muvee.style			msty
 application/vnd.mynfc				taglet
 application/vnd.ncd.control
 application/vnd.ncd.reference
+application/vnd.nearst.inv+json
 application/vnd.nervana				entity request bkm kcm
 application/vnd.netfpx
 # ntf: application/vnd.lotus-notes
@@ -877,6 +885,8 @@ application/vnd.oma.dcdc
 application/vnd.oma.dd2+xml			dd2
 application/vnd.oma.drm.risd+xml
 application/vnd.oma.group-usage-list+xml
+application/vnd.oma.lwm2m+json
+application/vnd.oma.lwm2m+tlv
 application/vnd.oma.pal+xml
 application/vnd.oma.poc.detailed-progress-report+xml
 application/vnd.oma.poc.final-report+xml
@@ -1010,6 +1020,7 @@ application/vnd.pvi.ptid1			ptid
 application/vnd.pwg-multiplexed
 application/vnd.pwg-xhtml-print+xml
 application/vnd.qualcomm.brew-app-res		bar
+application/vnd.quarantainenet
 application/vnd.Quark.QuarkXPress		qxd qxt qwd qwt qxl qxb
 application/vnd.quobject-quoxdocument		quox quiz
 application/vnd.radisys.moml+xml
@@ -1029,6 +1040,7 @@ application/vnd.radisys.msml-dialog+xml
 application/vnd.radisys.msml+xml
 application/vnd.rainstor.data			tree
 application/vnd.rapid
+application/vnd.rar				rar
 application/vnd.realvnc.bed			bed
 application/vnd.recordare.musicxml		mxl
 application/vnd.recordare.musicxml+xml
@@ -1380,12 +1392,16 @@ audio/vnd.sealedmedia.softseal.mpeg		smp3 smp s1m
 audio/vnd.vmx.cvsd
 audio/vorbis
 audio/vorbis-config
+image/bmp					bmp dib
 image/cgm					cgm
+image/dicom-rle					drle
+image/emf					emf
 image/example
 image/fits					fits fit fts
 image/g3fax
 image/gif					gif
 image/ief					ief
+image/jls					jls
 image/jp2					jp2 jpg2
 image/jpeg					jpg jpeg jpe jfif
 image/jpm					jpm jpgm
@@ -1430,6 +1446,7 @@ image/vnd.valve.source.texture			vtf
 image/vnd.wap.wbmp				wbmp
 image/vnd.xiff					xif
 image/vnd.zbrush.pcx				pcx
+image/wmf					wmf
 message/CPIM
 message/delivery-status
 message/disposition-notification
@@ -1454,6 +1471,7 @@ message/vnd.si.simp
 # wsc: application/vnd.wfa.wsc
 message/vnd.wfa.wsc
 model/example
+model/gltf+json					gltf
 model/iges					igs iges
 model/mesh					msh mesh silo
 model/vnd.collada+xml				dae
@@ -1537,6 +1555,7 @@ text/uri-list					uris uri
 text/vcard					vcf vcard
 text/vnd.a					a
 text/vnd.abc					abc
+text/vnd.ascii-art				ascii
 # curl: application/vnd.curl
 text/vnd.curl
 text/vnd.debian.copyright			copyright
@@ -1678,7 +1697,6 @@ application/x-bcpio				bcpio
 application/x-bittorrent			torrent
 application/x-bzip2				bz2
 application/x-cdlink				vcd
-application/x-chess-pgn				pgn
 application/x-chrome-extension			crx
 application/x-cpio				cpio
 application/x-csh				csh
@@ -1728,7 +1746,6 @@ audio/x-s3m					s3m
 audio/x-stm					stm
 audio/x-wav					wav
 chemical/x-xyz					xyz
-image/bmp					bmp
 image/webp					webp
 image/x-cmu-raster				ras
 image/x-portable-anymap				pnm
