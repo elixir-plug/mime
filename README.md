@@ -13,14 +13,6 @@ The package can be installed as:
     [{:mime, "~> 1.0"}]
   end
   ```
-
-2. Ensure mime is started before your application:
-
-  ```elixir
-  def application do
-    [applications: [:mime]]
-  end
-  ```
   
 ## Usage
 
