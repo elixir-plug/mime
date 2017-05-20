@@ -21,11 +21,22 @@ defmodule MIME do
 
   stream = File.stream!("lib/mime.types")
 
+  # TODO: remove when we depend on Elixir ~> 1.3.
+  string_trim =
+    if Version.compare(System.version(), "1.3.0") == :lt do
+      &apply(String, :strip, [&1])
+    else
+      &String.trim/1
+    end
+
   mapping = Enum.flat_map(stream, fn(line) ->
     if String.starts_with?(line, ["#", "\n"]) do
       []
     else
-      [type|exts] = line |> String.strip |> String.split
+      [type | exts] =
+        line
+        |> string_trim.()
+        |> String.split()
       [{type, exts}]
     end
   end)
