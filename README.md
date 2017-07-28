@@ -1,5 +1,8 @@
 # MIME
 
+[![Build Status](https://travis-ci.org/elixir-plug/mime.svg?branch=master)](https://travis-ci.org/elixir-plug/mime)
+[![Inline docs](http://inch-ci.org/github/elixir-plug/mime.svg?branch=master)](http://inch-ci.org/github/elixir-plug/mime)
+
 A library that maps mime types to extensions and vice-versa.
 
 ## Installation
