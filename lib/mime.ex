@@ -22,25 +22,26 @@ defmodule MIME do
   stream = File.stream!("lib/mime.types")
 
   # TODO: remove when we depend on Elixir ~> 1.3.
-  Code.ensure_loaded(String)
   string_trim =
-    if function_exported?(String, :trim, 1) do
+    if Code.ensure_loaded?(String) and function_exported?(String, :trim, 1) do
       &String.trim/1
     else
       &apply(String, :strip, [&1])
     end
 
-  mapping = Enum.flat_map(stream, fn(line) ->
-    if String.starts_with?(line, ["#", "\n"]) do
-      []
-    else
-      [type | exts] =
-        line
-        |> string_trim.()
-        |> String.split()
-      [{type, exts}]
-    end
-  end)
+  mapping =
+    Enum.flat_map(stream, fn line ->
+      if String.starts_with?(line, ["#", "\n"]) do
+        []
+      else
+        [type | exts] =
+          line
+          |> string_trim.()
+          |> String.split()
+
+        [{type, exts}]
+      end
+    end)
 
   app = Application.get_env(:mime, :types, %{})
 
@@ -56,7 +57,7 @@ defmodule MIME do
       false
 
   """
-  @spec valid?(String.t) :: boolean
+  @spec valid?(String.t()) :: boolean
   def valid?(type) do
     is_list(mime_to_ext(type))
   end
@@ -76,7 +77,7 @@ defmodule MIME do
       []
 
   """
-  @spec extensions(String.t) :: [String.t]
+  @spec extensions(String.t()) :: [String.t()]
   def extensions(type) do
     mime_to_ext(type) || []
   end
@@ -87,7 +88,7 @@ defmodule MIME do
   Returns the MIME type associated with a file extension.
 
   If no MIME type is known for `file_extension`,
-  `#{inspect @default_type}` is returned.
+  `#{inspect(@default_type)}` is returned.
 
   ## Examples
 
@@ -95,10 +96,10 @@ defmodule MIME do
       "text/plain"
 
       iex> MIME.type("foobarbaz")
-      #{inspect @default_type}
+      #{inspect(@default_type)}
 
   """
-  @spec type(String.t) :: String.t
+  @spec type(String.t()) :: String.t()
   def type(file_extension) do
     ext_to_mime(file_extension) || @default_type
   end
@@ -115,7 +116,7 @@ defmodule MIME do
       false
 
   """
-  @spec has_type?(String.t) :: boolean
+  @spec has_type?(String.t()) :: boolean
   def has_type?(file_extension) do
     is_binary(ext_to_mime(file_extension))
   end
@@ -129,7 +130,7 @@ defmodule MIME do
       "text/html"
 
   """
-  @spec from_path(Path.t) :: String.t
+  @spec from_path(Path.t()) :: String.t()
   def from_path(path) do
     case Path.extname(path) do
       "." <> ext -> type(downcase(ext, ""))
@@ -137,25 +138,27 @@ defmodule MIME do
     end
   end
 
-  defp downcase(<<h, t::binary>>, acc) when h in ?A..?Z, do: downcase(t, <<acc::binary, h+32>>)
+  defp downcase(<<h, t::binary>>, acc) when h in ?A..?Z, do: downcase(t, <<acc::binary, h + 32>>)
   defp downcase(<<h, t::binary>>, acc), do: downcase(t, <<acc::binary, h>>)
   defp downcase(<<>>, acc), do: acc
 
-  @spec ext_to_mime(String.t) :: String.t | nil
+  @spec ext_to_mime(String.t()) :: String.t() | nil
   defp ext_to_mime(type)
 
   # The ones from the app always come first.
-  for {type, exts} <- app, ext <- List.wrap(exts) do
+  for {type, exts} <- app,
+      ext <- List.wrap(exts) do
     defp ext_to_mime(unquote(ext)), do: unquote(type)
   end
 
-  for {type, exts} <- mapping, ext <- exts do
+  for {type, exts} <- mapping,
+      ext <- exts do
     defp ext_to_mime(unquote(ext)), do: unquote(type)
   end
 
   defp ext_to_mime(_ext), do: nil
 
-  @spec mime_to_ext(String.t) :: list(String.t) | nil
+  @spec mime_to_ext(String.t()) :: list(String.t()) | nil
   defp mime_to_ext(type)
 
   for {type, exts} <- app do

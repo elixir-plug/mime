@@ -13,7 +13,7 @@ The package can be installed as:
 
     ```elixir
     def deps do
-      [{:mime, "~> 1.1"}]
+      [{:mime, "~> 1.2"}]
     end
     ```
 
