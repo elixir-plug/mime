@@ -14,6 +14,7 @@ defmodule MIME do
 
       $ mix deps.clean mime --build
       $ mix deps.get
+
   """
 
   @compile :no_native
