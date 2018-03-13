@@ -24,7 +24,7 @@ The package can be installed as:
       [applications: [:mime]]
     end
     ```
-  
+
 ## Usage
 
 MIME types can be extended in your application `config/config.exs` as follows:
