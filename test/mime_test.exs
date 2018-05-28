@@ -31,7 +31,14 @@ defmodule MIMETest do
     assert from_path("without-extension") == "application/octet-stream"
   end
 
-  test "config" do
+  @tag :capture_log
+  test "config and application recompile" do
+    Application.put_env(:mime, :types, %{"video/mp2t" => ["ts"]}, persistent: true)
+
+    assert ExUnit.CaptureIO.capture_io(:stderr, fn ->
+             Application.start(:mime)
+           end) =~ "redefining module MIME"
+
     assert extensions("video/mp2t") == ["ts"]
     assert from_path("video.ts") == "video/mp2t"
   end

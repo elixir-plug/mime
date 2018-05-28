@@ -11,6 +11,7 @@ defmodule MIME.Mixfile do
       description: "A MIME type module for Elixir",
       package: package(),
       deps: deps(),
+      aliases: [test: "test --no-start"],
       docs: [
         source_ref: "v#{@version}",
         main: "MIME",
@@ -29,8 +30,9 @@ defmodule MIME.Mixfile do
 
   def application do
     [
-      extra_applications: Logger,
-      mod: {MIME.Application, []}
+      mod: {MIME.Application, []},
+      env: [types: %{}],
+      applications: [:logger]
     ]
   end
 
