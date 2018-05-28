@@ -1,7 +1,6 @@
 # MIME
 
 [![Build Status](https://travis-ci.org/elixir-plug/mime.svg?branch=master)](https://travis-ci.org/elixir-plug/mime)
-[![Inline docs](http://inch-ci.org/github/elixir-plug/mime.svg?branch=master)](http://inch-ci.org/github/elixir-plug/mime)
 
 A read-only and immutable MIME type module for Elixir.
 
