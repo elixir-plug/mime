@@ -3,7 +3,13 @@
 [![Build Status](https://travis-ci.org/elixir-plug/mime.svg?branch=master)](https://travis-ci.org/elixir-plug/mime)
 [![Inline docs](http://inch-ci.org/github/elixir-plug/mime.svg?branch=master)](http://inch-ci.org/github/elixir-plug/mime)
 
-A library that maps mime types to extensions and vice-versa.
+A read-only and immutable MIME type module for Elixir.
+
+This library embeds the MIME type database so we can map MIME types to extensions and vice-versa. The library was designed to be read-only for performance. New types can only be added at compile-time via configuration.
+
+This library is used by projects like Plug and Phoenix.
+
+See [the documentation for more information](http://hexdocs.pm/mime/).
 
 ## Installation
 
@@ -24,18 +30,6 @@ The package can be installed as:
       [applications: [:mime]]
     end
     ```
-  
-## Usage
-
-MIME types can be extended in your application `config/config.exs` as follows:
-
-```elixir
-config :mime, :types, %{
-  "application/vnd.api+json" => ["json-api"]
-}
-```
-
-And then run `mix deps.clean --build mime` to force mime to be recompiled across all environments.
 
 ## License
 
