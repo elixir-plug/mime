@@ -1,16 +1,17 @@
 defmodule MIME.Mixfile do
   use Mix.Project
 
-  @version "1.2.0"
+  @version "1.3.0"
 
   def project do
     [
       app: :mime,
       version: @version,
-      elixir: "~> 1.0",
+      elixir: "~> 1.3",
       description: "A MIME type module for Elixir",
       package: package(),
       deps: deps(),
+      aliases: [test: "test --no-start"],
       docs: [
         source_ref: "v#{@version}",
         main: "MIME",
@@ -28,7 +29,11 @@ defmodule MIME.Mixfile do
   end
 
   def application do
-    [applications: []]
+    [
+      mod: {MIME.Application, []},
+      env: [types: %{}],
+      applications: [:logger]
+    ]
   end
 
   defp deps do
