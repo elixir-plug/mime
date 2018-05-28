@@ -22,14 +22,6 @@ defmodule MIME do
 
   stream = File.stream!("lib/mime.types")
 
-  # TODO: remove when we depend on Elixir ~> 1.3.
-  string_trim =
-    if Code.ensure_loaded?(String) and function_exported?(String, :trim, 1) do
-      &String.trim/1
-    else
-      &apply(String, :strip, [&1])
-    end
-
   mapping =
     Enum.flat_map(stream, fn line ->
       if String.starts_with?(line, ["#", "\n"]) do
@@ -37,7 +29,7 @@ defmodule MIME do
       else
         [type | exts] =
           line
-          |> string_trim.()
+          |> String.trim()
           |> String.split()
 
         [{type, exts}]
@@ -45,6 +37,13 @@ defmodule MIME do
     end)
 
   app = Application.get_env(:mime, :types, %{})
+
+  @doc """
+  Returns the custom types compiled into the MIME module.
+  """
+  def compiled_custom_types do
+    unquote(Macro.escape(app))
+  end
 
   @doc """
   Returns whether a MIME type is registered.
