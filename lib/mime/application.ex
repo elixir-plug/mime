@@ -55,18 +55,11 @@ defmodule MIME.Application do
       stream = File.stream!(mime_file)
 
       mapping =
-        Enum.flat_map(stream, fn line ->
-          if String.starts_with?(line, ["#", "\n"]) do
-            []
-          else
-            [type | exts] =
-              line
-              |> String.trim()
-              |> String.split()
-
-            if exts == [], do: [], else: [{type, exts}]
-          end
-        end)
+        for line <- stream,
+            not String.starts_with?(line, ["#", "\n"]),
+            [type | exts] = line |> String.trim() |> String.split(),
+            exts != [],
+            do: {type, exts}
 
       @doc """
       Returns the custom types compiled into the MIME module.
