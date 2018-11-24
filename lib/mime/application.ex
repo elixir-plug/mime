@@ -64,7 +64,7 @@ defmodule MIME.Application do
               |> String.trim()
               |> String.split()
 
-            [{type, exts}]
+            if exts == [], do: [], else: [{type, exts}]
           end
         end)
 
