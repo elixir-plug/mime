@@ -45,7 +45,6 @@ defmodule MIME.Application do
       If you are using mix, it can be done with:
 
           $ mix deps.clean mime --build
-          $ mix deps.get
 
       """
 
