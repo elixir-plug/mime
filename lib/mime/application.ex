@@ -4,6 +4,7 @@ defmodule MIME.Application do
   use Application
   require Logger
 
+  # TODO: Use Application.compile_env! instead when we require Elixir v1.10+.
   def start(_, _) do
     app = Application.fetch_env!(:mime, :types)
 
@@ -23,7 +24,7 @@ defmodule MIME.Application do
           $ mix deps.clean mime --build
       """)
 
-      Module.create(MIME, quoted(app), __ENV__)
+      Module.create(MIME, quoted(app), file: __ENV__.file, line: __ENV__.line)
     end
 
     Supervisor.start_link([], strategy: :one_for_one)
