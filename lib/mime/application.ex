@@ -57,7 +57,7 @@ defmodule MIME.Application do
       mapping =
         for line <- stream,
             not String.starts_with?(line, ["#", "\n"]),
-            [type | exts] = line |> String.trim() |> String.split(),
+            [type | exts] = line |> String.trim() |> String.downcase() |> String.split(),
             exts != [],
             do: {type, exts}
 
@@ -102,7 +102,7 @@ defmodule MIME.Application do
       """
       @spec extensions(String.t()) :: [String.t()]
       def extensions(type) do
-        mime_to_ext(type) || []
+        mime_to_ext(downcase(type, "")) || []
       end
 
       @default_type "application/octet-stream"
