@@ -32,6 +32,6 @@ The package can be installed as:
 
 ## License
 
-MIME source code is released under Apache 2 License.
+MIME source code is released under Apache License 2.0.
 
 Check LICENSE file for more information.
