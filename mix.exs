@@ -23,7 +23,7 @@ defmodule MIME.Mixfile do
   def package do
     [
       maintainers: ["alirz23", "José Valim"],
-      licenses: ["Apache 2"],
+      licenses: ["Apache-2.0"],
       links: %{"GitHub" => "https://github.com/elixir-lang/mime"}
     ]
   end
