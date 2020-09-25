@@ -15,7 +15,7 @@ defmodule MIME.Mixfile do
       docs: [
         source_ref: "v#{@version}",
         main: "MIME",
-        source_url: "https://github.com/elixir-lang/mime"
+        source_url: "https://github.com/elixir-plug/mime"
       ]
     ]
   end
@@ -24,7 +24,7 @@ defmodule MIME.Mixfile do
     [
       maintainers: ["alirz23", "José Valim"],
       licenses: ["Apache-2.0"],
-      links: %{"GitHub" => "https://github.com/elixir-lang/mime"}
+      links: %{"GitHub" => "https://github.com/elixir-plug/mime"}
     ]
   end
 
