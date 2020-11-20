@@ -38,7 +38,7 @@ defmodule MIME.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.19", only: :docs},
+      {:ex_doc, "~> 0.19", only: :docs}
     ]
   end
 end
