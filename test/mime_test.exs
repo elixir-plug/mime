@@ -7,13 +7,18 @@ defmodule MIMETest do
   test "valid?/1" do
     assert valid?("application/json")
     refute valid?("application/prs.vacation-photos")
+
+    refute valid?("application/JSON")
+    refute valid?("application/json; charset=utf-8")
   end
 
   test "extensions/1" do
-    assert "json" in extensions("application/json")
+    assert extensions("application/json") == ["json"]
     assert extensions("application/vnd.api+json") == ["json-api"]
     assert extensions("audio/amr") == ["amr"]
     assert extensions("IMAGE/PNG") == ["png"]
+
+    assert extensions("application/json; charset=utf-8") == ["json"]
   end
 
   test "type/1" do

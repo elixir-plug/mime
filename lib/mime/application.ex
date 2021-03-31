@@ -102,7 +102,12 @@ defmodule MIME.Application do
       """
       @spec extensions(String.t()) :: [String.t()]
       def extensions(type) do
-        mime_to_ext(downcase(type, "")) || []
+        mime =
+          type
+          |> strip_params()
+          |> downcase("")
+
+        mime_to_ext(mime) || []
       end
 
       @default_type "application/octet-stream"
@@ -159,6 +164,10 @@ defmodule MIME.Application do
           "." <> ext -> type(downcase(ext, ""))
           _ -> @default_type
         end
+      end
+
+      defp strip_params(string) do
+        string |> String.split(";", parts: 2) |> hd()
       end
 
       defp downcase(<<h, t::binary>>, acc) when h in ?A..?Z,
