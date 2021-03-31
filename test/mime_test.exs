@@ -10,10 +10,15 @@ defmodule MIMETest do
   end
 
   test "extensions/1" do
-    assert "json" in extensions("application/json")
+    assert extensions("application/json") == ["json"]
     assert extensions("application/vnd.api+json") == ["json-api"]
     assert extensions("audio/amr") == ["amr"]
     assert extensions("IMAGE/PNG") == ["png"]
+
+    assert extensions("application/json; charset=utf-8") == ["json"]
+
+    assert extensions("application/vnd.custom+xml") == ["xml"]
+    assert extensions("application/vnd.custom+xml+xml") == []
   end
 
   test "type/1" do

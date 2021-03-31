@@ -96,13 +96,28 @@ defmodule MIME.Application do
           iex> MIME.extensions("application/json")
           ["json"]
 
+          iex> MIME.extensions("application/vnd.custom+xml")
+          ["xml"]
+
           iex> MIME.extensions("foo/bar")
           []
 
       """
       @spec extensions(String.t()) :: [String.t()]
       def extensions(type) do
-        mime_to_ext(downcase(type, "")) || []
+        mime =
+          type
+          |> strip_params()
+          |> downcase("")
+
+        mime_to_ext(mime) || suffix(mime) || []
+      end
+
+      defp suffix(type) do
+        case String.split(type, "+") do
+          [type_subtype_without_suffix, suffix] -> [suffix]
+          _ -> nil
+        end
       end
 
       @default_type "application/octet-stream"
@@ -159,6 +174,10 @@ defmodule MIME.Application do
           "." <> ext -> type(downcase(ext, ""))
           _ -> @default_type
         end
+      end
+
+      defp strip_params(string) do
+        string |> :binary.split(";") |> hd()
       end
 
       defp downcase(<<h, t::binary>>, acc) when h in ?A..?Z,
