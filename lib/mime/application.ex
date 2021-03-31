@@ -177,7 +177,7 @@ defmodule MIME.Application do
       end
 
       defp strip_params(string) do
-        string |> String.split(";", parts: 2) |> hd()
+        string |> :binary.split(";") |> hd()
       end
 
       defp downcase(<<h, t::binary>>, acc) when h in ?A..?Z,
