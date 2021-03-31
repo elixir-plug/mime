@@ -68,19 +68,8 @@ defmodule MIME.Application do
         unquote(Macro.escape(custom_types))
       end
 
-      @doc """
-      Returns whether a MIME type is registered.
-
-      ## Examples
-
-          iex> MIME.valid?("text/plain")
-          true
-
-          iex> MIME.valid?("foo/bar")
-          false
-
-      """
-      @spec valid?(String.t()) :: boolean
+      @doc false
+      @deprecated "Use MIME.extensions(type) != [] instead"
       def valid?(type) do
         is_list(mime_to_ext(type))
       end

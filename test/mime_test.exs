@@ -4,11 +4,6 @@ defmodule MIMETest do
   import MIME
   doctest MIME
 
-  test "valid?/1" do
-    assert valid?("application/json")
-    refute valid?("application/prs.vacation-photos")
-  end
-
   test "extensions/1" do
     assert "json" in extensions("application/json")
     assert extensions("application/vnd.api+json") == ["json-api"]
