@@ -7,9 +7,6 @@ defmodule MIMETest do
   test "valid?/1" do
     assert valid?("application/json")
     refute valid?("application/prs.vacation-photos")
-
-    refute valid?("application/JSON")
-    refute valid?("application/json; charset=utf-8")
   end
 
   test "extensions/1" do
