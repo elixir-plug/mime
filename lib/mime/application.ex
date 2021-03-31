@@ -96,6 +96,9 @@ defmodule MIME.Application do
           iex> MIME.extensions("application/json")
           ["json"]
 
+          iex> MIME.extensions("application/vnd.custom+xml")
+          ["xml"]
+
           iex> MIME.extensions("foo/bar")
           []
 
@@ -107,7 +110,14 @@ defmodule MIME.Application do
           |> strip_params()
           |> downcase("")
 
-        mime_to_ext(mime) || []
+        mime_to_ext(mime) || suffix(mime) || []
+      end
+
+      defp suffix(type) do
+        case String.split(type, "+") do
+          [type_subtype_without_suffix, suffix] -> [suffix]
+          _ -> nil
+        end
       end
 
       @default_type "application/octet-stream"

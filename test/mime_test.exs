@@ -19,6 +19,9 @@ defmodule MIMETest do
     assert extensions("IMAGE/PNG") == ["png"]
 
     assert extensions("application/json; charset=utf-8") == ["json"]
+
+    assert extensions("application/vnd.custom+xml") == ["xml"]
+    assert extensions("application/vnd.custom+xml+xml") == []
   end
 
   test "type/1" do
