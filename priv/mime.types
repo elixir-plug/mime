@@ -534,7 +534,7 @@ application/vnd.antix.game-component
 application/vnd.apache.thrift.binary
 application/vnd.apache.thrift.compact
 application/vnd.apache.thrift.json
-application/vnd.api+json
+application/vnd.api+json    json-api
 application/vnd.aplextor.warrp+json
 application/vnd.apothekende.reservation+json
 application/vnd.apple.installer+xml		dist distz pkg mpkg
