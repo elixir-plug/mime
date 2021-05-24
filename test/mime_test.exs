@@ -11,7 +11,7 @@ defmodule MIMETest do
 
   test "extensions/1" do
     assert extensions("application/json") == ["json"]
-    assert extensions("application/vnd.api+json") == ["json"]
+    assert extensions("application/vnd.api+json") == ["json-api"]
     assert extensions("audio/amr") == ["amr"]
     assert extensions("IMAGE/PNG") == ["png"]
 
