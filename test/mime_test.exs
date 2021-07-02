@@ -4,19 +4,18 @@ defmodule MIMETest do
   import MIME
   doctest MIME
 
-  test "valid?/1" do
-    assert valid?("application/json")
-    refute valid?("application/prs.vacation-photos")
-  end
-
   test "extensions/1" do
+    assert extensions("application/json; charset=utf-8") == ["json"]
     assert extensions("application/json") == ["json"]
     assert extensions("application/vnd.api+json") == ["json-api"]
-    assert extensions("audio/amr") == ["amr"]
+
+    assert extensions("image/png") == ["png"]
     assert extensions("IMAGE/PNG") == ["png"]
 
-    assert extensions("application/json; charset=utf-8") == ["json"]
+    assert extensions("text/html") == ["html", "htm"]
+    assert extensions("text/xml") == ["xml"]
 
+    assert extensions("application/xml") == ["xml"]
     assert extensions("application/vnd.custom+xml") == ["xml"]
     assert extensions("application/vnd.custom+xml+xml") == []
   end
@@ -36,17 +35,5 @@ defmodule MIMETest do
     assert from_path("index.HTML") == "text/html"
     assert from_path("inexistent.filetype") == "application/octet-stream"
     assert from_path("without-extension") == "application/octet-stream"
-  end
-
-  @tag :capture_log
-  test "config and application recompile" do
-    Application.put_env(:mime, :types, %{"video/mp2t" => ["ts"]}, persistent: true)
-
-    assert ExUnit.CaptureIO.capture_io(:stderr, fn ->
-             Application.start(:mime)
-           end) =~ "redefining module MIME"
-
-    assert extensions("video/mp2t") == ["ts"]
-    assert from_path("video.ts") == "video/mp2t"
   end
 end
