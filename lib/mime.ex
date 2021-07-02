@@ -104,12 +104,13 @@ defmodule MIME do
     end
   end
 
-  exts = Map.merge(to_exts.(types), %{
-    "3g2" => ["video/3gpp2"],
-    "3gp" => ["video/3gpp"],
-    "js" => ["application/javascript"],
-    "xml" => ["text/xml"]
-  })
+  exts =
+    Map.merge(to_exts.(types), %{
+      "3g2" => ["video/3gpp2"],
+      "3gp" => ["video/3gpp"],
+      "js" => ["application/javascript"],
+      "xml" => ["text/xml"]
+    })
 
   for {ext, [_, _ | _] = mimes} <- exts do
     raise "conflicting MIMEs for extension .#{ext}, please override: #{inspect(mimes)}"
