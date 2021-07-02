@@ -24,7 +24,7 @@ defmodule MIME do
     "application/json" => ["json"],
     "application/json-patch+json" => ["json-patch"],
     "application/ld+json" => ["jsonld"],
-    "application/manifest+json" => ["webmanifest"]
+    "application/manifest+json" => ["webmanifest"],
     "application/msword" => ["doc"],
     "application/octet-stream" => ["bin"],
     "application/ogg" => ["ogx"],
