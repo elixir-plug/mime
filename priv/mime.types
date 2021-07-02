@@ -1487,7 +1487,7 @@ application/xenc+xml
 application/xhtml+xml				xhtml xhtm xht
 application/xliff+xml				xlf
 # xml, xsd, rng: text/xml
-application/xml
+application/xml				xml
 # mod: audio/x-mod
 application/xml-dtd				dtd
 # ent: text/xml-external-parsed-entity
