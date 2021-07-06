@@ -54,6 +54,7 @@ defmodule MIME do
     "application/x-csh" => ["csh"],
     "application/x-freearc" => ["arc"],
     "application/x-httpd-php" => ["php"],
+    "application/x-msaccess" => ["mdb"],
     "application/x-sh" => ["sh"],
     "application/x-shockwave-flash" => ["swf"],
     "application/x-tar" => ["tar"],
@@ -92,12 +93,14 @@ defmodule MIME do
     "text/xml" => ["xml"],
     "video/3gpp" => ["3gp"],
     "video/3gpp2" => ["3g2"],
+    "video/quicktime" => ["mov"],
     "video/mp2t" => ["ts"],
     "video/mp4" => ["mp4"],
-    "video/mpeg" => ["mpeg"],
+    "video/mpeg" => ["mpeg", "mpg"],
     "video/ogg" => ["ogv"],
     "video/webm" => ["webm"],
-    "video/x-msvideo" => ["avi"]
+    "video/x-msvideo" => ["avi"],
+    "video/x-ms-wmv" => ["wmv"]
   }
 
   custom_types = Application.compile_env(:mime, :types, %{})
