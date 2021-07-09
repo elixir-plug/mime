@@ -115,7 +115,7 @@ defmodule MIME do
     Map.merge(to_exts.(types), %{
       "3g2" => ["video/3gpp2"],
       "3gp" => ["video/3gpp"],
-      "js" => ["application/javascript"],
+      "js" => ["text/javascript"],
       "xml" => ["text/xml"]
     })
 
