@@ -80,7 +80,7 @@ defmodule MIME do
     "image/gif" => ["gif"],
     "image/jpeg" => ["jpg", "jpeg"],
     "image/png" => ["png"],
-    "image/svg+xml" => ["svg"],
+    "image/svg+xml" => ["svg", "svgz"],
     "image/tiff" => ["tiff", "tif"],
     "image/vnd.microsoft.icon" => ["ico"],
     "image/webp" => ["webp"],
