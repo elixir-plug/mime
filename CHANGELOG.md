@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.0
+
+Upgrade note: mime v2 no longer ships with a complete database of mime.types,
+instead it lists the most common mime types used by web applications. When
+upgrading, check carefully if all mime types used by your app are supported.
+
+  * Ship with our own minimal types database
+
 ## v1.6.0
 
   * Deprecate MIME.valid?

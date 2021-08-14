@@ -30,7 +30,7 @@ defmodule MIME.Mixfile do
   def application do
     [
       env: [],
-      applications: [:logger]
+      extra_applications: [:logger]
     ]
   end
 
