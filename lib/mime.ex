@@ -89,7 +89,7 @@ defmodule MIME do
     "text/csv" => ["csv"],
     "text/html" => ["html", "htm"],
     "text/javascript" => ["js", "mjs"],
-    "text/plain" => ["txt"],
+    "text/plain" => ["txt", "text"],
     "text/xml" => ["xml"],
     "video/3gpp" => ["3gp"],
     "video/3gpp2" => ["3g2"],
