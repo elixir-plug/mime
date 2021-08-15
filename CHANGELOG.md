@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.1
+
+  * Add text extension to text/plain
+
 ## v2.0.0
 
 Upgrade note: mime v2 no longer ships with a complete database of mime.types,
