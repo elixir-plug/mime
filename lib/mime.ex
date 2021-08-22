@@ -103,6 +103,7 @@ defmodule MIME do
     "video/x-ms-wmv" => ["wmv"]
   }
 
+  require Application
   custom_types = Application.compile_env(:mime, :types, %{})
 
   to_exts = fn map ->
