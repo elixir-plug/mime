@@ -21,7 +21,7 @@ The package can be installed as:
 
 ```elixir
 def deps do
-  [{:mime, "~> 1.2"}]
+  [{:mime, "~> 2.0"}]
 end
 ```
 
