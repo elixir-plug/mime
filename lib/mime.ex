@@ -17,6 +17,7 @@ defmodule MIME do
   """
 
   types = %{
+    "application/atom+xml" => ["atom"],
     "application/epub+zip" => ["epub"],
     "application/gzip" => ["gz"],
     "application/java-archive" => ["jar"],
