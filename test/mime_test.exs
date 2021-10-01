@@ -36,4 +36,18 @@ defmodule MIMETest do
     assert from_path("inexistent.filetype") == "application/octet-stream"
     assert from_path("without-extension") == "application/octet-stream"
   end
+
+  test "types map is sorted" do
+    quoted = Code.string_to_quoted!(File.read!("lib/mime.ex"))
+
+    assert {_, true} =
+             Macro.postwalk(quoted, false, fn
+               {:=, _, [{:types, _, _}, {:%{}, _, keys}]} = expr, _ ->
+                 assert keys == Enum.sort(keys)
+                 {expr, true}
+
+               expr, val ->
+                 {expr, val}
+             end)
+  end
 end
