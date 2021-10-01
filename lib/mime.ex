@@ -101,8 +101,8 @@ defmodule MIME do
     "video/ogg" => ["ogv"],
     "video/quicktime" => ["mov"],
     "video/webm" => ["webm"],
-    "video/x-ms-wmv" => ["wmv"]
-    "video/x-msvideo" => ["avi"],
+    "video/x-ms-wmv" => ["wmv"],
+    "video/x-msvideo" => ["avi"]
   }
 
   require Application
