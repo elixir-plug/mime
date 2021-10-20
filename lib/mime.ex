@@ -36,6 +36,8 @@ defmodule MIME do
     "application/vnd.amazon.ebook" => ["azw"],
     "application/vnd.api+json" => ["json-api"],
     "application/vnd.apple.installer+xml" => ["mpkg"],
+    "application/vnd.etsi.asic-e+zip" => ["asice", "sce"],
+    "application/vnd.etsi.asic-s+zip" => ["asics", "scs"],
     "application/vnd.mozilla.xul+xml" => ["xul"],
     "application/vnd.ms-excel" => ["xls"],
     "application/vnd.ms-fontobject" => ["eot"],
