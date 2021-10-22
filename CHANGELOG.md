@@ -1,8 +1,13 @@
 # Changelog
 
+## v2.0.2
+
+  * Support Associated Signature Containers (ASiC) files
+  * Support `.atom` and `.rss` files
+
 ## v2.0.1
 
-  * Add text extension to text/plain
+  * Add `.text` extension to text/plain
 
 ## v2.0.0
 
