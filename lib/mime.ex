@@ -83,6 +83,7 @@ defmodule MIME do
     "image/bmp" => ["bmp"],
     "image/gif" => ["gif"],
     "image/jpeg" => ["jpg", "jpeg"],
+    "image/jxl" => ["jxl"],
     "image/png" => ["png"],
     "image/svg+xml" => ["svg", "svgz"],
     "image/tiff" => ["tiff", "tif"],
