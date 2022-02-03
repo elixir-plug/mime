@@ -82,6 +82,8 @@ defmodule MIME do
     "image/avif" => ["avif"],
     "image/bmp" => ["bmp"],
     "image/gif" => ["gif"],
+    "image/heic" => ["heic", "hif"],
+    "image/heif" => ["heic", "hif"],
     "image/jpeg" => ["jpg", "jpeg"],
     "image/jxl" => ["jxl"],
     "image/png" => ["png"],
