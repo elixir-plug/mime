@@ -15,6 +15,8 @@ defmodule MIMETest do
     assert extensions("text/html") == ["html", "htm"]
     assert extensions("text/xml") == ["xml"]
 
+    assert extensions("image/vnd.adobe.photoshop") == ["psd"]
+
     assert extensions("application/xml") == ["xml"]
     assert extensions("application/vnd.custom+xml") == ["xml"]
     assert extensions("application/vnd.custom+xml+xml") == []
@@ -35,6 +37,8 @@ defmodule MIMETest do
     assert from_path("index.HTML") == "text/html"
     assert from_path("inexistent.filetype") == "application/octet-stream"
     assert from_path("without-extension") == "application/octet-stream"
+
+    assert from_path("image.psd") == "image/vnd.adobe.photoshop"
   end
 
   test "types map is sorted" do

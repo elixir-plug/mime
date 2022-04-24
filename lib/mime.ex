@@ -89,6 +89,7 @@ defmodule MIME do
     "image/png" => ["png"],
     "image/svg+xml" => ["svg", "svgz"],
     "image/tiff" => ["tiff", "tif"],
+    "image/vnd.adobe.photoshop" => ["psd"],
     "image/vnd.microsoft.icon" => ["ico"],
     "image/webp" => ["webp"],
     "text/calendar" => ["ics"],
