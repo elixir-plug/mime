@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.3
+
+  * Support Markdown, JPEG XL, and PSD formats
+
 ## v2.0.2
 
   * Support Associated Signature Containers (ASiC) files
