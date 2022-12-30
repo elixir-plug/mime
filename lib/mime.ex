@@ -137,7 +137,7 @@ defmodule MIME do
 
   all_types =
     Map.merge(types, custom_types, fn _, default_exts, custom_exts ->
-      default_exts ++ custom_exts
+      Enum.uniq(custom_exts ++ default_exts)
     end)
 
   @doc """
