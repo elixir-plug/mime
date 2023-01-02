@@ -4,6 +4,10 @@ defmodule MIMETest do
   import MIME
   doctest MIME
 
+  setup_all %{} do
+    Code.compiler_options(ignore_module_conflict: true)
+  end
+
   test "extensions/1" do
     assert extensions("application/json; charset=utf-8") == ["json"]
     assert extensions("application/json") == ["json"]
@@ -53,5 +57,31 @@ defmodule MIMETest do
                expr, val ->
                  {expr, val}
              end)
+  end
+
+  test "add custom extensions" do
+    Application.put_env(:mime, :types, %{"text/plain" => ["env"]})
+
+    [File.cwd!(), "lib", "mime.ex"]
+    |> Path.join()
+    |> Code.compile_file()
+
+    assert MIME.extensions("text/plain") == ["env", "txt", "text"]
+    assert MIME.type("env") == "text/plain"
+    assert MIME.type("txt") == "text/plain"
+    assert MIME.type("text") == "text/plain"
+  end
+
+  test "add custom extensions avoiding duplicates" do
+    Application.put_env(:mime, :types, %{"text/plain" => ["env", "txt", "text"]})
+
+    [File.cwd!(), "lib", "mime.ex"]
+    |> Path.join()
+    |> Code.compile_file()
+
+    assert MIME.extensions("text/plain") == ["env", "txt", "text"]
+    assert MIME.type("env") == "text/plain"
+    assert MIME.type("txt") == "text/plain"
+    assert MIME.type("text") == "text/plain"
   end
 end
