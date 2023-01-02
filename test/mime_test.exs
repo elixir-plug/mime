@@ -4,10 +4,6 @@ defmodule MIMETest do
   import MIME
   doctest MIME
 
-  setup_all %{} do
-    Code.compiler_options(ignore_module_conflict: true)
-  end
-
   test "extensions/1" do
     assert extensions("application/json; charset=utf-8") == ["json"]
     assert extensions("application/json") == ["json"]
