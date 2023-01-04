@@ -134,7 +134,11 @@ defmodule MIME do
   end
 
   all_exts = Map.merge(exts, to_exts.(custom_types))
-  all_types = Map.merge(types, custom_types)
+
+  all_types =
+    Map.merge(types, custom_types, fn _, default_exts, custom_exts ->
+      Enum.uniq(custom_exts ++ default_exts)
+    end)
 
   @doc """
   Returns the custom types compiled into the MIME module.
