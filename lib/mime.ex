@@ -9,8 +9,13 @@ defmodule MIME do
         "application/vnd.api+json" => ["json-api"]
       }
 
-  After adding the configuration, MIME needs to be recompiled.
-  If you are using mix, it can be done with:
+  Note that defining a new type will completely override all
+  previous extensions. You can use `MIME.extensions/1` to get
+  the existing extension to add whenever defining.
+
+  After adding the configuration, MIME needs to be recompiled
+  if you are using an Elixir version earlier than v1.15. In such
+  cases, it can be done with:
 
       $ mix deps.clean mime --build
 
@@ -121,24 +126,19 @@ defmodule MIME do
     end
   end
 
-  exts =
-    Map.merge(to_exts.(types), %{
+  all_types = Map.merge(types, custom_types)
+
+  all_exts =
+    Map.merge(to_exts.(all_types), %{
       "3g2" => ["video/3gpp2"],
       "3gp" => ["video/3gpp"],
       "js" => ["text/javascript"],
       "xml" => ["text/xml"]
     })
 
-  for {ext, [_, _ | _] = mimes} <- exts do
+  for {ext, [_, _ | _] = mimes} <- all_exts do
     raise "conflicting MIMEs for extension .#{ext}, please override: #{inspect(mimes)}"
   end
-
-  all_exts = Map.merge(exts, to_exts.(custom_types))
-
-  all_types =
-    Map.merge(types, custom_types, fn _, default_exts, custom_exts ->
-      Enum.uniq(custom_exts ++ default_exts)
-    end)
 
   @doc """
   Returns the custom types compiled into the MIME module.
@@ -192,8 +192,8 @@ defmodule MIME do
 
   ## Examples
 
-      iex> MIME.type("txt")
-      "text/plain"
+      iex> MIME.type("html")
+      "text/html"
 
       iex> MIME.type("foobarbaz")
       #{inspect(@default_type)}
@@ -209,7 +209,7 @@ defmodule MIME do
 
   ## Examples
 
-      iex> MIME.has_type?("txt")
+      iex> MIME.has_type?("html")
       true
 
       iex> MIME.has_type?("foobarbaz")
