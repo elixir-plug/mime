@@ -117,6 +117,14 @@ defmodule MIME do
     "video/x-msvideo" => ["avi"]
   }
 
+  #selected from https://www.iana.org/assignments/media-type-structured-suffix/media-type-structured-suffix.xhtml
+  suffixes = %{
+    "gzip" => ["gz"],
+    "json" => ["json"],
+    "xml" => ["xml"],
+    "zip" => ["zip"]
+  }
+
   require Application
   custom_types = Application.compile_env(:mime, :types, %{})
 
@@ -177,7 +185,7 @@ defmodule MIME do
 
   defp suffix(type) do
     case String.split(type, "+") do
-      [_type_subtype_without_suffix, suffix] -> [suffix]
+      [_type_subtype_without_suffix, suffix] -> suffix_to_ext(suffix)
       _ -> nil
     end
   end
@@ -265,4 +273,13 @@ defmodule MIME do
   end
 
   defp mime_to_ext(_type), do: nil
+
+  @spec suffix_to_ext(String.t()) :: list(String.t()) | nil
+  defp suffix_to_ext(suffix)
+
+  for {suffix, exts} <- suffixes do
+    defp suffix_to_ext(unquote(suffix)), do: unquote(List.wrap(exts))
+  end
+
+  defp suffix_to_ext(_suffix), do: nil
 end

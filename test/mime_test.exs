@@ -20,6 +20,8 @@ defmodule MIMETest do
     assert extensions("application/xml") == ["xml"]
     assert extensions("application/vnd.custom+xml") == ["xml"]
     assert extensions("application/vnd.custom+xml+xml") == []
+    assert extensions("application/vnd.custom+inexist") == []
+    assert extensions("application/vnd.custom+xml/extrainvalid") == []
   end
 
   test "type/1" do
