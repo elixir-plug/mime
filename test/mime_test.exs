@@ -69,4 +69,14 @@ defmodule MIMETest do
     assert MIME.type("txt") == "application/octet-stream"
     assert MIME.type("text") == "application/octet-stream"
   end
+
+  test "overrides suffixes" do
+    Application.put_env(:mime, :suffixes, %{"custom-format" => ["cf"]})
+
+    [File.cwd!(), "lib", "mime.ex"]
+    |> Path.join()
+    |> Code.compile_file()
+
+    assert MIME.extensions("text/plain+custom-format") == ["cf"]
+  end
 end

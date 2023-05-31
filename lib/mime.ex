@@ -11,7 +11,15 @@ defmodule MIME do
 
   Note that defining a new type will completely override all
   previous extensions. You can use `MIME.extensions/1` to get
-  the existing extension to add whenever defining.
+  the existing extension to keep when redefining.
+
+  You can also customize the extensions for suffixes. For example,
+  the mime type "application/custom+gzip" returns the extension
+  `".gz"` because the suffix "gzip" maps to `["gz"]`:
+
+      config :mime, :suffixes, %{
+        "gzip" => ["gz"]
+      }
 
   After adding the configuration, MIME needs to be recompiled
   if you are using an Elixir version earlier than v1.15. In such
@@ -117,14 +125,6 @@ defmodule MIME do
     "video/x-msvideo" => ["avi"]
   }
 
-  #selected from https://www.iana.org/assignments/media-type-structured-suffix/media-type-structured-suffix.xhtml
-  suffixes = %{
-    "gzip" => ["gz"],
-    "json" => ["json"],
-    "xml" => ["xml"],
-    "zip" => ["zip"]
-  }
-
   require Application
   custom_types = Application.compile_env(:mime, :types, %{})
 
@@ -147,6 +147,18 @@ defmodule MIME do
   for {ext, [_, _ | _] = mimes} <- all_exts do
     raise "conflicting MIMEs for extension .#{ext}, please override: #{inspect(mimes)}"
   end
+
+
+  # https://www.iana.org/assignments/media-type-structured-suffix/media-type-structured-suffix.xhtml
+  default_suffixes = %{
+    "gzip" => ["gz"],
+    "json" => ["json"],
+    "xml" => ["xml"],
+    "zip" => ["zip"]
+  }
+
+  custom_suffixes = Application.compile_env(:mime, :suffixes, %{})
+  suffixes = Map.merge(default_suffixes, custom_suffixes)
 
   @doc """
   Returns the custom types compiled into the MIME module.
