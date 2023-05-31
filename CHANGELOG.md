@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.4
+
+  * Only returns extensions from known suffixes
+  * Allow mime types to be fully overridden
+
 ## v2.0.3
 
   * Support Markdown, JPEG XL, and PSD formats
