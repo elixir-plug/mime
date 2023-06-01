@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.5
+
+  * Allow conflicting extension to be overridden
+
 ## v2.0.4
 
   * Only returns extensions from known suffixes
