@@ -130,24 +130,21 @@ defmodule MIME do
 
   to_exts = fn map ->
     for {media, exts} <- map, ext <- exts, reduce: %{} do
-      acc -> Map.update(acc, ext, [media], &[media | &1])
+      acc -> Map.update(acc, ext, media, &[media | List.wrap(&1)])
     end
   end
 
   all_types = Map.merge(types, custom_types)
 
-  all_exts =
-    Map.merge(to_exts.(all_types), %{
-      "3g2" => ["video/3gpp2"],
-      "3gp" => ["video/3gpp"],
-      "js" => ["text/javascript"],
-      "xml" => ["text/xml"]
-    })
+  default_exts = %{
+    "3g2" => "video/3gpp2",
+    "3gp" => "video/3gpp",
+    "js" => "text/javascript",
+    "xml" => "text/xml"
+  }
 
-  for {ext, [_, _ | _] = mimes} <- all_exts do
-    raise "conflicting MIMEs for extension .#{ext}, please override: #{inspect(mimes)}"
-  end
-
+  custom_exts = Application.compile_env(:mime, :extensions, %{})
+  all_exts = Map.merge(to_exts.(all_types), Map.merge(default_exts, custom_exts))
 
   # https://www.iana.org/assignments/media-type-structured-suffix/media-type-structured-suffix.xhtml
   default_suffixes = %{
@@ -271,8 +268,24 @@ defmodule MIME do
   @spec ext_to_mime(String.t()) :: String.t() | nil
   defp ext_to_mime(type)
 
-  for {ext, [type | _]} <- all_exts do
-    defp ext_to_mime(unquote(ext)), do: unquote(type)
+  for {ext, mimes} <- all_exts do
+    case mimes do
+      [first | _] ->
+        raise """
+        extension .#{ext} currently maps to different mime-types: #{inspect(mimes)}
+
+        You must tell us which mime-type is preferred by defining the :extensions \
+        configuration. For example:
+
+            config :mime, :extensions, %{
+              #{inspect(ext)} => #{inspect(first)}
+            }
+
+        """
+
+      mime ->
+        defp ext_to_mime(unquote(ext)), do: unquote(mime)
+    end
   end
 
   defp ext_to_mime(_ext), do: nil
