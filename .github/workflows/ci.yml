@@ -15,17 +15,9 @@ jobs:
       matrix:
         include:
         - elixir: '1.11.4'
-          otp: '23.3.4.19'
-        - elixir: '1.12.3'
-          otp: '23.3.4.19'
-        - elixir: '1.12.3'
-          otp: '23.3.4.19'
-        - elixir: '1.13.4'
-          otp: '23.3.4.19'
+          otp: '23.3'
         - elixir: '1.14.5'
-          otp: '24.3.4.12'
-        - elixir: '1.15.0-rc.2'
-          otp: '25.3.2.2'
+          otp: '24.3'
         - elixir: '1.15.0-rc.2'
           otp: '26.0.1'
     steps:
