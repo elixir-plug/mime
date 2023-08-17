@@ -165,6 +165,13 @@ defmodule MIME do
   end
 
   @doc """
+  Returns a list of all known types, including custom types compiled into the MIME module.
+  """
+  def known_types do
+    Map.keys(unquote(Macro.escape(all_types)))
+  end
+
+  @doc """
   Returns the extensions associated with a given MIME type.
 
   ## Examples
