@@ -165,10 +165,13 @@ defmodule MIME do
   end
 
   @doc """
-  Returns a list of all known types, including custom types compiled into the MIME module.
+  Returns a mapping of all known types to their extensions,
+  including custom types compiled into the MIME module.
   """
+  @doc since: "2.1.0"
+  @spec known_types() :: %{String.t() => [String.t()]}
   def known_types do
-    Map.keys(unquote(Macro.escape(all_types)))
+    unquote(Macro.escape(all_types))
   end
 
   @doc """
