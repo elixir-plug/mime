@@ -49,6 +49,19 @@ defmodule MIMETest do
     assert from_path("image.psd") == "image/vnd.adobe.photoshop"
   end
 
+  test "known_types/0" do
+    Application.put_env(:mime, :types, %{"application/dicom" => ["dcm"]})
+    recompile!()
+
+    assert is_map(known_types())
+
+    assert Map.has_key?(known_types(), "application/json")
+    assert Map.has_key?(known_types(), "application/dicom")
+
+    assert Map.get(known_types(), "application/json") == ["json"]
+    assert Map.get(known_types(), "application/dicom") == ["dcm"]
+  end
+
   test "types map is sorted" do
     quoted = Code.string_to_quoted!(File.read!("lib/mime.ex"))
 

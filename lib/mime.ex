@@ -165,6 +165,22 @@ defmodule MIME do
   end
 
   @doc """
+  Returns a mapping of all known types to their extensions,
+  including custom types compiled into the MIME module.
+  
+  ## Examples
+  
+      known_types()
+      #=> %{"application/json" => ["json"], ...}
+
+  """
+  @doc since: "2.1.0"
+  @spec known_types() :: %{required(String.t()) => [String.t()]}
+  def known_types do
+    unquote(Macro.escape(all_types))
+  end
+
+  @doc """
   Returns the extensions associated with a given MIME type.
 
   ## Examples
