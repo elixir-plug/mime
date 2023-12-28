@@ -97,6 +97,7 @@ defmodule MIME do
     "image/gif" => ["gif"],
     "image/heic" => ["heic"],
     "image/heif" => ["heif"],
+    "image/jp2" => [".jp2"]
     "image/jpeg" => ["jpg", "jpeg"],
     "image/jxl" => ["jxl"],
     "image/png" => ["png"],
