@@ -92,6 +92,7 @@ defmodule MIME do
     "font/ttf" => ["ttf"],
     "font/woff" => ["woff"],
     "font/woff2" => ["woff2"],
+    "image/apng" => ["apng"],
     "image/avif" => ["avif"],
     "image/bmp" => ["bmp"],
     "image/gif" => ["gif"],
