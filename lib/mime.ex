@@ -154,7 +154,8 @@ defmodule MIME do
     "gzip" => ["gz"],
     "json" => ["json"],
     "xml" => ["xml"],
-    "zip" => ["zip"]
+    "zip" => ["zip"],
+    "zstd" => ["zst"]
   }
 
   custom_suffixes = Application.compile_env(:mime, :suffixes, %{})
