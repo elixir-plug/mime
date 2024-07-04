@@ -1,7 +1,7 @@
 defmodule MIME.Mixfile do
   use Mix.Project
 
-  @version "2.0.5"
+  @version "2.0.6"
 
   def project do
     [
