@@ -79,6 +79,7 @@ defmodule MIME do
     "application/xhtml+xml" => ["xhtml"],
     "application/xml" => ["xml"],
     "application/zip" => ["zip"],
+    "application/zstd" => ["zst"],
     "audio/3gpp" => ["3gp"],
     "audio/3gpp2" => ["3g2"],
     "audio/aac" => ["aac"],
