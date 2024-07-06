@@ -171,9 +171,9 @@ defmodule MIME do
   @doc """
   Returns a mapping of all known types to their extensions,
   including custom types compiled into the MIME module.
-  
+
   ## Examples
-  
+
       known_types()
       #=> %{"application/json" => ["json"], ...}
 
