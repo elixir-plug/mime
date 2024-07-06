@@ -7,7 +7,7 @@ defmodule MIME.Mixfile do
     [
       app: :mime,
       version: @version,
-      elixir: "~> 1.11",
+      elixir: "~> 1.10",
       description: "A MIME type module for Elixir",
       package: package(),
       deps: deps(),
