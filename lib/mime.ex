@@ -119,7 +119,7 @@ defmodule MIME do
     "video/3gpp" => ["3gp"],
     "video/3gpp2" => ["3g2"],
     "video/mp2t" => ["ts"],
-    "video/mp4" => ["mp4"],
+    "video/mp4" => ["mp4", "m4v"],
     "video/mpeg" => ["mpeg", "mpg"],
     "video/ogg" => ["ogv"],
     "video/quicktime" => ["mov"],
