@@ -30,6 +30,13 @@ defmodule MIMETest do
     assert extensions("application/vnd.custom+xml/extrainvalid") == []
   end
 
+  test "extensions must not lead with a dot" do
+    for {type, exts} <- known_types(), ext <- exts do
+      expected = String.replace_leading(ext, ".", "")
+      assert expected == ext, "type '#{type}' includes '#{ext}', replace it with '#{expected}'."
+    end
+  end
+
   test "type/1" do
     assert type("json") == "application/json"
     assert type("foo") == "application/octet-stream"
