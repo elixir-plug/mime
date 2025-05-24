@@ -83,12 +83,14 @@ defmodule MIME do
     "audio/3gpp" => ["3gp"],
     "audio/3gpp2" => ["3g2"],
     "audio/aac" => ["aac"],
+    "audio/matroska" => ["mka"],
     "audio/midi" => ["mid", "midi"],
     "audio/mpeg" => ["mp3"],
     "audio/ogg" => ["oga"],
     "audio/opus" => ["opus"],
     "audio/wav" => ["wav"],
     "audio/webm" => ["weba"],
+    "audio/x-matroska" => ["mka"],
     "font/otf" => ["otf"],
     "font/ttf" => ["ttf"],
     "font/woff" => ["woff"],
@@ -118,12 +120,16 @@ defmodule MIME do
     "text/xml" => ["xml"],
     "video/3gpp" => ["3gp"],
     "video/3gpp2" => ["3g2"],
+    "video/matroska" => ["mkv"],
+    "video/matroska-3d" => ["mk3d"],
     "video/mp2t" => ["ts"],
     "video/mp4" => ["mp4"],
     "video/mpeg" => ["mpeg", "mpg"],
     "video/ogg" => ["ogv"],
     "video/quicktime" => ["mov"],
     "video/webm" => ["webm"],
+    "video/x-matroska" => ["mkv"],
+    "video/x-matroska-3d" => ["mk3d"],
     "video/x-ms-wmv" => ["wmv"],
     "video/x-msvideo" => ["avi"]
   }
@@ -143,6 +149,9 @@ defmodule MIME do
     "3g2" => "video/3gpp2",
     "3gp" => "video/3gpp",
     "js" => "text/javascript",
+    "mk3d" => "video/matroska-3d",
+    "mka" => "audio/matroska",
+    "mkv" => "video/matroska",
     "xml" => "text/xml"
   }
 
