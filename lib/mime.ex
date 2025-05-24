@@ -149,6 +149,9 @@ defmodule MIME do
     "3g2" => "video/3gpp2",
     "3gp" => "video/3gpp",
     "js" => "text/javascript",
+    "mk3d" => "video/matroska-3d",
+    "mka" => "audio/matroska",
+    "mkv" => "video/matroska",
     "xml" => "text/xml"
   }
 
