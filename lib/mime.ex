@@ -113,6 +113,7 @@ defmodule MIME do
     "text/calendar" => ["ics"],
     "text/css" => ["css"],
     "text/csv" => ["csv"],
+    "text/event-stream" => ["sse"],
     "text/html" => ["html", "htm"],
     "text/javascript" => ["js", "mjs"],
     "text/markdown" => ["md", "markdown"],
