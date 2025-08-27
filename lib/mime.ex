@@ -86,6 +86,7 @@ defmodule MIME do
     "audio/matroska" => ["mka"],
     "audio/midi" => ["mid", "midi"],
     "audio/mpeg" => ["mp3"],
+    "audio/mp4" => ["m4a"],
     "audio/ogg" => ["oga"],
     "audio/opus" => ["opus"],
     "audio/wav" => ["wav"],
